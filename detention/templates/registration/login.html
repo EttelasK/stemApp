@@ -1,0 +1,25 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+
+<title>RCP Detention Web App - Login</title>
+
+{% block content %}
+<div class='row'>
+    <div class='col-sm-6 col-sm-offset-3'>
+        <h1><small>Login</small></h1>
+        <form method="post"><h4><small>
+            {% csrf_token %}
+            {{ form|crispy }}
+            </small></h4>
+            <button class='btn btn-block btn-primary' type="submit"/>Login</form>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1><small>New Users, Register:</small></h1>
+        <a class="btn btn-primary" href="{% url 'student_register' %}">Students</a> | <a class="btn btn-primary" href="{% url 'parent_register' %}">Parents</a>
+    </div>
+</div>
+{% endblock %}
