@@ -6,28 +6,82 @@
 
       <!-- Jumbotron -->
       <div class="jumbotron">
-        <h1>Marketing stuff!</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>
+        {% if student %}
+        <h1>Welcome {{student}}!</h1>
+        {% else %}
+        <h1>Welcome {{parent}}!</h1>
+        {% endif %}
+        <p class="lead">You have had {{demerits.count}} demerits this year and {{detentions.count}} upcoming detention(s).
+            Be sure to check your detentions status page for details on parent sign off, location of your detentions and the date/ time of your detentions.
+            If you should have any questions regaurding the details of this app, please reach out to your advisor; {% if student %}{{student.advisor}}{% else %}{{parent.student_username.advisor}}{% endif %}.
+        </p>
       </div>
-
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-lg-4">
-          <h2>Safari bug warning!</h2>
-          <p class="text-danger">As of v9.1.2, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+          <h2>Student Info:</h2>
+            {% if student %}
+            <ul>
+                <li>Username: {{student.username}}</li>
+                <li>Password: **********</li>
+                <li>Email: {{student.email}}</li>
+                <li>Grade Level: {{student.grade_level}}</li>
+                <li>Advisor: {{student.advisor}}</li>
+                <li>Profile Created On: {{student.date_created}}</li>
+            </ul>
+            {% else %}
+            <ul>
+                <li>Username: {{parent.username}}</li>
+                <li>Password: **********</li>
+                <li>Email: {{parent.email}}</li>
+                <li>Student's Grade Level: {{parent.student_username.grade_level}}</li>
+                <li>Student's Advisor: {{parent.student_username.advisor}}</li>
+                <li>Profile Created On: {{parent.date_created}}</li>
+            </ul>
+            {% endif %}
+          <p><a class="btn btn-primary" href="#" role="button">Change Info &raquo;</a></p>
         </div>
         <div class="col-lg-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-       </div>
+          <h2>Demerits:</h2>
+            {% if demerits %}
+            <div class="table-responsive">
+                <table class="table">
+                    <th>Infraction</th>
+                    <th>Qty</th>
+                    <th>Date</th>
+            {% for d in demerits %}
+                    <tr>
+                        <td>{{d.infraction}}</td>
+                        <td>{{d.demerit_quantity}}</td>
+                        <td>{{d.date_assigned}}</td>
+                    </tr>
+            {% endfor %}
+                </table>
+            </div>
+            {% else %}
+                <p>You have no demerits so far this year. Way to go!</p>
+                {% endif %}
+              <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+        </div>
         <div class="col-lg-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+          <h2>Detentions:</h2>
+            {% if detentions %}
+            <div class="table-responsive">
+                <table class="table">
+                    <th>Date</th>
+                    <th>Parent Approved?</th>
+                    {% for det in detentions %}
+                    <tr>
+                        <td>{{det.detention_date}}</td>
+                        <td>{{det.parent_approval}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% else %}
+              <p>You have no detentions so far this year. Way to go!</p>
+                {% endif %}
+              <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div>
 

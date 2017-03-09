@@ -11,9 +11,19 @@ def index(request):
     if username_pk is None:
         return redirect('login')
     else:
-        student = None
-        #student = StudentProfile.objects.get(username=request.user)
-    context = {'student':student}
+        student_check = StudentProfile.objects.filter(username=request.user)
+        parent_check = ParentProfile.objects.filter(username=request.user)
+        if len(student_check) > 0:
+            parent = None
+            student = StudentProfile.objects.get(username=request.user)
+            demerits = Demerit.objects.filter(student=student)
+            detentions = Detention.objects.filter(demerit__student=student).distinct()
+        elif len(parent_check) > 0:
+            student = None
+            parent = ParentProfile.objects.get(username=request.user)
+            demerits = Demerit.objects.filter(student=parent.student_username)
+            detentions = Detention.objects.filter(demerit__student=parent.student_username)
+    context = {'student':student,'parent':parent, 'detentions':detentions,'demerits':demerits}
     return render(request, 'detention/index.html', context)
 
 def studentregister(request):
