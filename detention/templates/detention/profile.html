@@ -1,0 +1,27 @@
+{% extends 'detention/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+      <!-- Jumbotron -->
+      <div class="jumbotron">
+        <h2 style="color: red">Profile Page</h2>
+
+      </div>
+
+      <!-- Example row of columns -->
+      <div class="row">
+          {{student}}
+          <div class="row">
+              you've been a user since {{student.date_created}}
+          </div>
+            
+
+
+
+
+
+      </div>
+
+{% endblock %}

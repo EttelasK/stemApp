@@ -37,18 +37,14 @@
       <!-- The justified navigation menu is meant for single line per list item.
            Multiple lines will require custom code not provided by Bootstrap. -->
       <div class="masthead">
-        {% if student %}
-        <h4 class="text-muted">Logged In as {{student.username}}</h4>
-        {% else %}
-        <h4 class="text-muted">Logged In as {{parent.username}}</h4>
-        {% endif %}
+        <h3 class="text-muted">Welcome, {% if student %} {{student.first_name}} {% else %} {{parent.first_name}} {% endif %}!  </h3>
         <nav>
           <ul class="nav nav-justified">
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Demerits</a></li>
-            <li><a href="#">Detentions</a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li><a href="{% url 'index' %}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+            <li><a href="{% url 'profile' %}"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+            <li><a href="{% url 'demerits' %}"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Demerits</a></li>
+            <li><a href="{% url 'detentions' %}"><i class="fa fa-calendar" aria-hidden="true"></i> Detentions</a></li>
+            <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
           </ul>
         </nav>
       </div>
@@ -56,13 +52,10 @@
 
         {% endblock %}
         <!-- Site footer -->
-
+        <footer class="footer">
+            <p>RCP Detention Web Application Built By Serina Rodriguez, Class of 2017</p>
+        </footer>
     </div> <!-- /container -->
-    <div class="row">
-      <footer class="footer">
-        <p>RCP Detention Web Application Built By Serina Rodriguez, Class of 2017</p>
-      </footer>
-    </div>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
     <!-- jQuery -->

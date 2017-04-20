@@ -1,0 +1,29 @@
+{% extends 'detention/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<h2>Demerits:</h2>
+<div class="col-lg-12">
+    <div class="table-responsive">
+        <table class="table">
+            <th>Infraction:</th>
+            <th>Date Assigned:</th>
+            <th>Assigned By:</th>
+            <th>Quantity:</th>
+            <th>Expiration Date:</th>
+            {% for d in demerit %}
+            <tr>
+                <td>{{d.infraction}}</td>
+                <td>{{d.date_assigned}}</td>
+                <td>{{d.assigned_by}}</td>
+                <td>{{d.demerit_quantity}}D</td>
+                <td>Date or "Inactive"</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

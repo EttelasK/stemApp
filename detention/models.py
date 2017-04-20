@@ -50,7 +50,7 @@ class Demerit(models.Model):
     infraction = models.CharField(max_length=200)
     demerit_quantity = models.IntegerField()
     def __str__(self):
-        return '%s - %s'% (self.student, self.infraction)
+        return '%s-%s' % (self.date_assigned, self.student)
 
 class Detention(models.Model):
     detention_date = models.DateField()
@@ -58,13 +58,6 @@ class Detention(models.Model):
     location = models.CharField(max_length=50)
     parent_profile = models.ForeignKey(ParentProfile)
     parent_approval = models.BooleanField(default=False)
-    parent_approval_date = models.DateField(blank=True, null=True)
+    parent_approval_date = models.DateField(default=datetime.datetime.now)
     demerit = models.ManyToManyField(Demerit)
-    def __str__(self):
-        return 'Detention on %s'% (self.detention_date)
-    def complete(self):
-        if self.detention_date >= datetime.datetime.now:
-            completed = False
-        elif self.detention_date < datetime.datetime.now:
-            completed = True
-        return completed
+
