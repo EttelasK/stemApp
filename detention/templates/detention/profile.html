@@ -4,24 +4,36 @@
 
 {% block content %}
 
-      <!-- Jumbotron -->
-      <div class="jumbotron">
-        <h2 style="color: red">Profile Page</h2>
+<div class="row">
+    <table>
+        <th>
+            <h1><i class="fa fa-user fa-3x pull-left"></i></h1>
+        </th>
+        <th>
+            <h1>Profile Page for {% if student %}{{student}}{% else %}{{parent}}{% endif %}</h1>
+        </th>
+    </table>
+</div>
 
-      </div>
+<div class="row">
+    <h2><small>You've been a user since {% if student %}{{student.date_created}}{% else %}{{parent.date_created}}{% endif %}</small></h2>
+</div>
 
-      <!-- Example row of columns -->
-      <div class="row">
-          {{student}}
-          <div class="row">
-              you've been a user since {{student.date_created}}
-          </div>
-            
+<div class="row">
+    <h3>Update User Information Here:</h3>
+    <div class="col-md-12 col-lg-12">
+        <form method="POST">{% csrf_token %}
+            {{form_unamepass|crispy}}
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-primary btn-block" type="submit">Update </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 
 
-
-
-      </div>
 
 {% endblock %}

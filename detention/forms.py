@@ -34,3 +34,23 @@ class ParentRegistrationForm(forms.ModelForm):
                   'security_answer',
                   'student_username',
                   )
+
+class ChangeParentProfileForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.CharField(widget=forms.EmailInput)
+    class Meta:
+        model = ParentProfile
+        fields = ('email',
+                  'username',
+                  'password',
+                  )
+
+class ChangeStudentProfileForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.CharField(widget=forms.EmailInput)
+    class Meta:
+        model = ParentProfile
+        fields = ('email',
+                  'username',
+                  'password',
+                  )

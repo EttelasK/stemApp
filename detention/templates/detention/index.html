@@ -18,7 +18,7 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-lg-4">
-          <h2>My profile:</h2>
+          <h2>My Profile:</h2>
             {% if student %}
           <ul>
               <li>Username: {{student.username}}</li>
@@ -33,7 +33,7 @@
               <li>Grade Level: {{parent.student_username.grade_level}}</li>
               <li>Profile Created On: {{parent.date_created}}</li></ul>
             {% endif %}
-            <p><a class="btn btn-primary" href="#" role="button">Edit Profile <i class="fa fa-arrow-right" aria-hidden="true"></i></i></a></p>
+            <p><a class="btn btn-primary" href="{% url 'profile' %}" role="button">Edit Profile <i class="fa fa-arrow-right" aria-hidden="true"></i></i></a></p>
         </div>
         <div class="col-lg-4">
           <h2>Demerits:</h2>
@@ -47,17 +47,10 @@
                         <td>{{d.infraction}}</td>
                         <td>{{d.date_assigned}}</td>
                         <td>{{d.demerit_quantity}}D</td>
-
-
-
                     </tr>{% endfor %}
-
-
-
-
                 </table>
             </div>
-          <p><a class="btn btn-primary" href="#" role="button">View Details <i class="fa fa-arrow-right" aria-hidden="true"></i></i></a></p>
+          <p><a class="btn btn-primary" href="{% url 'demerits' %}" role="button">View Details <i class="fa fa-arrow-right" aria-hidden="true"></i></i></a></p>
        </div>
         <div class="col-lg-4">
           <h2>Detentions:</h2>
@@ -73,7 +66,7 @@
                 </table>
             </div>
 
-          <p><a class="btn btn-primary" href="#" role="button">View Details <i class="fa fa-arrow-right" aria-hidden="true"></i> </i></a></p>
+          <p><a class="btn btn-primary" href="{% url 'detentions' %}" role="button">View Details <i class="fa fa-arrow-right" aria-hidden="true"></i> </i></a></p>
         </div>
       </div>
 

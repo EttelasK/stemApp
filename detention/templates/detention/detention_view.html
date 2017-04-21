@@ -1,0 +1,35 @@
+{% extends 'detention/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<h2>Detention on {{det.detention_date}} at {{det.start_time}}</h2>
+<h3>Report to: {{det.location}}</h3>
+
+
+<div class="row">
+    <ol>
+        {% for d in det.demerit.all %}
+        <li>On {{d.date_assigned}} {{d.demerit_quantity}}D assigned for "{{d.infraction}}" by {{d.assigned_by}}</li>
+        {% endfor %}
+    </ol>
+</div>
+
+<div class="row">
+    {% if parent %}
+    <p><a class="btn btn-primary btn-block" href="{% url 'detentions' %}{{det.id}}/approve" role="button">APPROVE</a></p>
+    {% endif %}
+    {% if det.parent_approval %}<h3>This detention was approved by {{det.parent_profile}} on {{det.parent_approval_date}}</h3> {% else %} <h3 style="color:red">This detention has not been approved.</h3> {% endif %}
+</div>
+
+{% endblock %}
+
+
+<!--detention_date = models.DateField()-->
+    <!--start_time = models.TimeField()-->
+    <!--location = models.CharField(max_length=50)-->
+    <!--parent_profile = models.ForeignKey(ParentProfile)-->
+    <!--parent_approval = models.BooleanField(default=False)-->
+    <!--parent_approval_date = models.DateField(default=datetime.datetime.now)-->
+    <!--demerit = models.ManyToManyField(Demerit)-->

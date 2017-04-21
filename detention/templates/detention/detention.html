@@ -4,20 +4,24 @@
 
 {% block content %}
 
-<div class="col-lg-12">
-    <h2>Detentions:</h2>
+<h2>Detentions Overview</h2>
+
+<div class="row">
     <div class="table-responsive">
         <table class="table">
             <th>Detention Assigned:</th>
             <th>Parent's Approval:</th>
+            <th>Approval Date:</th>
+            <th>View Details:</th>
             {% for d in det %}
             <tr>
-                <td>{{d.detention_date}}</td>
+                <td>{{d.detention_date}} at {{d.start_time}}</td>
                 <td>{% if d.parent_approval %}Yes{% else %}No{% endif %}</td>
+                <td>{% if d.parent_approval %}{{d.parent_approval_date}}{% else %}N/A{% endif %}</td>
+                <td><a href="{{d.id}}/view">View</a></td>
             </tr>{% endfor %}
         </table>
     </div>
-    <p><a class="btn btn-primary" href="#" role="button">View Details <i class="fa fa-arrow-right" aria-hidden="true"></i> </i></a></p>
 </div>
 
 {% endblock %}
