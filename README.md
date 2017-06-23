@@ -4,4 +4,4 @@ This application allows students and parents to view and approved their detentio
 
 This web app was created by Serina Rodriguez (HS Class of 2017) and Keith Salette (Mentor)
 
-webapp url: 
+webapp url: http://raunerstemapp.herokuapp.com/
